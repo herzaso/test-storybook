@@ -1,4 +1,6 @@
+import React from 'react';
 import type { Preview } from "@storybook/react";
+import { MyBlock } from '../src/stories/MyBlock';
 
 const preview: Preview = {
   parameters: {
@@ -9,6 +11,13 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    docs: {
+      page: () => (
+        <>
+          <MyBlock />
+        </>
+      ),
+    }
   },
 };
 

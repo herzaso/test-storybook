@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
+import { MyType } from './types';
 import './button.css';
 
-interface ButtonProps {
+type ButtonProps = MyType & {
   /**
    * Is this the principal call to action on the page?
    */
@@ -22,21 +23,23 @@ interface ButtonProps {
    * Optional click handler
    */
   onClick?: () => void;
+
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({
-  primary = false,
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({
+  primary = true,
   size = 'medium',
   backgroundColor,
   label,
   ...props
-}: ButtonProps) => {
+}, ref) {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
     <button
+      ref={ref}
       type="button"
       className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
       style={{ backgroundColor }}
@@ -45,4 +48,4 @@ export const Button = ({
       {label}
     </button>
   );
-};
+});
